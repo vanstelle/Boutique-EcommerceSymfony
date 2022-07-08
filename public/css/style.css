@@ -1,0 +1,22 @@
+.img-home{
+    /* width: 100%; */
+    width: 70vh;
+    height: 35vh;
+}
+
+.div-img-home{
+    transition: .2s;
+}
+.div-img-home:hover{
+    transform: scale(1.1);
+}
+
+.img-produit-admin {
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 2px solid #dee2e6;
+  border-radius: 25px;
+  max-width: 20%;
+  height: auto;
+}
+

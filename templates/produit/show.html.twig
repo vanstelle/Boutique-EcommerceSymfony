@@ -1,0 +1,49 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+{{ produit.titre }}
+{% endblock %}
+
+{% block content %}
+<div class="row div-show-produit d-flex justify-content-center align-items-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <div class="images p-3">
+                        <div class="text-center p-4"> <img id="img-fluid" src="{{ asset('photosProduits/' ~ produit.photo) }}" width="250" /> </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="product p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> 
+                              <span  class="ml-1">Back</span> 
+                            </div> <i class="fa fa-shopping-cart text-muted"></i>
+                        </div>
+                        <div class="mt-4 mb-3">
+                            <h5 class="text-uppercase">{{ produit.titre}}</h5>
+                            <div class="price d-flex flex-row align-items-center">
+                                <span class="act-price">{{produit.prix}}€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="about">{{produit.description}}</p>
+                    <div class="sizes mt-5 text-center">
+                        <h6 class="text-uppercase">taille : {{ produit.taille }}</h6>
+                        <h6 class="text-uppercase">Couleur : {{produit.couleur}}</h6>
+                        <h6 class="text-uppercase">Il en reste {{produit.stock}}</h6>
+                    </div>
+                    <div class="cart mt-4 align-items-center text-center">
+                        <a  href="{{ path('panier_add', {id: produit.id}) }}">
+                            <button class="btn btn-danger text-uppercase mr-2 px-4">
+                               Ajouter au panier
+                            </button
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

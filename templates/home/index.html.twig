@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent() }} Boutique{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1>Bienvenue à la boutique du t-shirt</h1>
+    <h2>Voici nos derniers produits :</h2>
+</div>
+
+<div class="justify-content-center">
+    {% for produit in produits %} 
+    <div class="row justify-content-center" >
+        <div class="col card mb-3 " style="max-width: 800px;">
+            <div class="row g-0">
+                <div class="col-md-6 text-center">
+                    <img src="{{ asset('photosProduits/' ~ produit.photo) }}" class="img-fluid rounded-start"
+                        alt="{{ produit.titre }}">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body text-center">
+                        <h4 class="card-title"><a class="text-decoration-none text-success" href="{{ path('produit_show',{id: produit.id}) }}">{{produit.titre}}</a></h4>
+                        <h6 class="text-muted">ajouté le : {{ produit.dateEnregistrement | date('d/m/Y') }}</h6>
+                        <h5>couleur : {{ produit.couleur }}</h5>
+                        <h5>taille : {{ produit.taille }}</h5>
+                        <h5>il en reste {{ produit.stock }}</h5>
+                        <h5>prix : <strong>{{ produit.prix }}€</strong></h5>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+    {% endfor %}
+
+</div>
+
+{% endblock %}

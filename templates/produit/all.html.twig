@@ -1,0 +1,56 @@
+{% extends "layout.html.twig" %}
+
+
+
+{% block title %}
+    Tous les produits
+{% endblock %}
+
+
+
+{% block content %}
+<div class="row mt-5">
+    
+    <div class="col-md-2 justify-content-center pt-4">
+        <ul class="list-group">
+            {% for categorie in categories %}
+                <a class="text-decoration-none" href="{{ path('produits_categorie', {id: categorie.id}) }}"> <li class="list-group-item btn btn-primary text-center">{{ categorie.nom }}</li> </a>           
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="col-md-10 justify-content-center text-center">
+        <h4>liste des produits </h4>
+        {% for produit in produits %} 
+            <div class="row justify-content-center" >
+                <div class="col card mb-3 " style="max-width: 800px;">
+                    <div class="row g-0">
+                        <div class="col-md-6 text-center">
+                            <img src="{{ asset('photosProduits/' ~ produit.photo) }}" class="img-fluid rounded-start"
+                                alt="{{ produit.titre }}">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body text-center">
+                                <h4 class="card-title"><a href="{{ path('produit_show', {id: produit.id}) }}">{{produit.titre}}</a></h4>
+                                <h6>categorie : 
+                                {% if produit.categorie %}
+                                    {{ produit.categorie.nom }}</h6>
+                                {% else %}
+                                        inconnue
+                                {% endif %}
+    
+                                <h6 class="text-muted">ajouté le : {{ produit.dateEnregistrement | date('d/m/Y') }}</h6>
+                                <h5>couleur : {{ produit.couleur }}</h5>
+                                <h5>taille : {{ produit.taille }}</h5>
+                                <h5>il en reste {{ produit.stock }}</h5>
+                                <h5>prix : <strong>{{ produit.prix }}€</strong></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}gestion produits{% endblock %}
+
+{% block content %}
+<a href="{{ path("admin_ajout_produit") }}"><button type="button" class="btn btn-success text-white">ajouter un
+    produit</button></a>
+<table class="table text-center ">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">titre</th>
+      <th scope="col">description</th>
+      <th scope="col">couleur</th>
+      <th scope="col">taille</th>
+      <th scope="col">photo</th>
+      <th scope="col">prix</th>
+      <th scope="col">stock</th>
+      <th scope="col">date d'enregistrement</th>
+      <th scope="col">Categorie</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for produit in produits %}
+    <tr>
+      <td>{{ produit.id }}</td>
+      <td>{{ produit.titre }}</td>
+      <td>{{ produit.description | slice(0, 50) }}</td>
+      <td>{{ produit.couleur }}</td>
+      <td>{{ produit.taille }}</td>
+      <td><img class="img-thumbnail" src="{{ asset('photosProduits/' ~ produit.photo) }}" alt="{{ produit.titre }}">
+      </td>
+      <td>{{ produit.prix }}</td>
+      <td>{{ produit.stock }}</td>
+      <td>{{ produit.dateEnregistrement | date("d/m/Y \à H\\hi") }}</td>
+      <td>
+        {% if produit.categorie %}
+          {{ produit.categorie.nom }}
+        {% else %}
+          inconnue
+        {% endif %}
+      </td>
+
+      <td>
+        <a href="{{ path('admin_details_produit', {id: produit.id} ) }}">show</a>
+        <a href="{{ path('admin_update_produit', {id: produit.id}) }}">update</a>
+        <a href="{{ path('admin_delete_produit', {id: produit.id}) }}"
+          onclick="return confirm('êtes vous sûr de vouloir supprimer le produit ?')">delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
